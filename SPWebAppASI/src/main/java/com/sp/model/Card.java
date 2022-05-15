@@ -43,12 +43,20 @@ public class Card {
 		this.owner=null;
 	}
 
-	public Integer getId() {
+	public Integer getCardID() {
 		return cardID;
 	}
 
-	public void setId(Integer id) {
-		this.cardID = id;
+	public void setCardID(Integer cardID) {
+		this.cardID = cardID;
+	}
+
+	public User getOwner() {
+		return owner;
+	}
+
+	public void setOwner(User owner) {
+		this.owner = owner;
 	}
 
 	public String getNom() {

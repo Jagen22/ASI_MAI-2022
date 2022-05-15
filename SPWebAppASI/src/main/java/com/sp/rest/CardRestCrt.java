@@ -24,14 +24,12 @@ public class CardRestCrt {
     
     @RequestMapping(method = RequestMethod.GET, value = "/card")
     public List<Card> listAllCards() {
-        List<Card> Lcard = cService.findAllCards();
-        return Lcard;
+        return cService.findAllCards();
     }
     
     @RequestMapping(method=RequestMethod.GET,value="/card/{id}")
     public Card getCard(@PathVariable String id) {
-    	Card c = cService.getCard(Integer.valueOf(id));
-        return c;
+        return cService.getCard(Integer.valueOf(id));
     }
 	
     @RequestMapping(method=RequestMethod.POST, value="/initCards")

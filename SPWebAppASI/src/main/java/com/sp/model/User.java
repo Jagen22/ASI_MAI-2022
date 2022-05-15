@@ -40,12 +40,12 @@ public class User {
 		this.listCard = listCard;
 	}
 
-	public Integer getId() {
+	public Integer getUserID() {
 		return userID;
 	}
 
-	public void setId(Integer id) {
-		this.userID = id;
+	public void setUserID(Integer userID) {
+		this.userID = userID;
 	}
 
 	public String getPseudo() {
@@ -94,6 +94,14 @@ public class User {
 
 	public void setListCard(List<Card> listCard) {
 		this.listCard = listCard;
+	}
+	
+	public void addCard(Card card) {
+		this.listCard.add(card);
+	}
+	
+	public void removeCard(Card card) {
+		this.listCard.remove(card);
 	}
 
 }

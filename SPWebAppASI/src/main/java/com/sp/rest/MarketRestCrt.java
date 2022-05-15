@@ -30,7 +30,6 @@ public class MarketRestCrt {
 	
 	@RequestMapping(method=RequestMethod.GET,value="/market/all")
 	public List<Card> forSale() {
-		List<Card> Lcard = mService.forSale();
-		return Lcard;
+		return mService.forSale();
 	}
 }

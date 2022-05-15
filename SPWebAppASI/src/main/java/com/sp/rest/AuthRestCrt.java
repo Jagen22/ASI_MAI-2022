@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sp.service.AuthService;
 
-@RestController
-public class AuthRestCrt {
-	@Autowired
-	AuthService aservice;
+	@RestController
+	public class AuthRestCrt {
+		@Autowired
+		AuthService aService;
 	
-	@RequestMapping(method=RequestMethod.GET,value="/login/{pseudo}/{mdp}")
-	public boolean verifUser(@PathVariable String pseudo, @PathVariable String mdp) {
-		return aservice.verifUser(pseudo,mdp);
-	}
+		@RequestMapping(method=RequestMethod.GET,value="/login/{pseudo}/{mdp}")
+		public boolean verifUser(@PathVariable String pseudo, @PathVariable String mdp) {
+			return aService.verifUser(pseudo,mdp);
+		}
 }
