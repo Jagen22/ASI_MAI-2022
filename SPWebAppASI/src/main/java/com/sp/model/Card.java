@@ -9,7 +9,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Card")
+@Table(name = "CARD")
 public class Card {
 	@Id
 	@GeneratedValue
@@ -23,7 +23,8 @@ public class Card {
 	private int price;
 	// Mapping the column of this table
     @ManyToOne
-    @JoinColumn(name = "User")
+    //@JoinColumn(name = "User")
+    @JoinColumn(name = "userID", nullable = true)
 	private User owner;
 	
 	

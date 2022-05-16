@@ -11,7 +11,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "User")
+@Table(name = "USER")
 public class User {
 	@Id
 	@GeneratedValue
@@ -23,7 +23,8 @@ public class User {
 	private int money;
 	
 	//Regarder pour nullify a la place de cascade
-	@OneToMany(cascade = CascadeType.ALL)
+	//@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="owner")
 	private List<Card> listCard;
 	
 	public User() {

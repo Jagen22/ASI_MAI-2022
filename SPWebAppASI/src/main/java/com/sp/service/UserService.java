@@ -7,11 +7,15 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sp.model.Card;
 import com.sp.model.User;
 import com.sp.repository.UserRepository;
 
 @Service
 public class UserService {
+	@Autowired
+	CardService cService;
+	
 	@Autowired
 	UserRepository uRepository;
 	
@@ -30,28 +34,23 @@ public class UserService {
 	}
 	
 	public List<User> findAllUsers() {
-		boolean res = true;
-		int userID = 1;
-		List<User> Luser = new ArrayList<User>();
-		while(res) {
-			Optional<User> uOpt = uRepository.findById(userID);
-			if (uOpt.isPresent()) {
-				Luser.add(uOpt.get());
-			}else {
-				res = false;
-			}
-			userID++;
-		}
-		
-		return Luser;
+		return (List<User>) uRepository.findAll();
 	}
 	
 	public void initUsers() {
-		for (int userID = 0; userID<10; userID++) {
-			User createdUser=uRepository.save(new User(userID, "pseudo"+userID, "name", "surname", "password", 5000, null));
+		for (int userID = 0; userID<5; userID++) {
+			int numCard = 0;
+			List<Card> cardList = new ArrayList<Card>();
+			while (numCard < 5) {
+				int taille = cService.noOwner().size();
+				Card randomCard = cService.noOwner().get((int) (Math.random()*taille-1));
+				cardList.add(randomCard);
+				numCard++;
+			}
+			System.out.println(cardList);
+			User createdUser=uRepository.save(new User(userID, "pseudo"+userID, "name", "surname", "password", 5000, cardList));
 			System.out.println(createdUser);
 		}
-
 	}
 
 	public boolean verifUser(String pseudo, String mdp) {

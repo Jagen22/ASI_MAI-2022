@@ -30,24 +30,21 @@ public class CardService {
 	}
 	
 	public List<Card> findAllCards() {
-		boolean res = true;
-		int cardID = 1;
-		List<Card> Lcard = new ArrayList<Card>();
-		while(res) {
-			Optional<Card> cOpt = cRepository.findById(cardID);
-			if (cOpt.isPresent()) {
-				Lcard.add(cOpt.get());
-			}else {
-				res = false;
+		return (List<Card>) cRepository.findAll();
+	}
+	
+	public List<Card> noOwner(){
+		List<Card> noOwnerList = new ArrayList<Card>();
+		for (Card card : this.findAllCards()) {
+			if (card.getOwner()==null) {
+				noOwnerList.add(card);
 			}
-			cardID++;
 		}
-		
-		return Lcard;
+		return noOwnerList;
 	}
 	
 	public void initCards() {
-		for (int cardID = 0; cardID<30; cardID++) {
+		for (int cardID = 0; cardID<50; cardID++) {
 			Card createdCard=cRepository.save(new Card(cardID, "name", "description", "famille", "affinity", 10+cardID*10, 30, 500));
 			System.out.println(createdCard);
 		}

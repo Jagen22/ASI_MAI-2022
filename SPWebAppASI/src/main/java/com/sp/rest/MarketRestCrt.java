@@ -18,7 +18,7 @@ public class MarketRestCrt {
 	
 	MarketService mService;
 	
-	@RequestMapping(method=RequestMethod.POST,value="/market/buy")
+	@RequestMapping(method=RequestMethod.POST,value="/market/buy/{idCard}/{idBuyer}")
 	public void buy(@PathVariable int idCard, @PathVariable int idBuyer) {
 		mService.buy(idCard,idBuyer);
 	}

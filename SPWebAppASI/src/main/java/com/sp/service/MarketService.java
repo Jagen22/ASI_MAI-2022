@@ -1,6 +1,5 @@
 package com.sp.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +13,7 @@ public class MarketService {
 
 	@Autowired
 	UserService uService;
+	@Autowired
 	CardService cService;
 	public void buy(int idCard, int idBuyer) {
 		Card cardToBuy = cService.getCard(idCard);
@@ -36,13 +36,7 @@ public class MarketService {
 		}		
 	}
 	public List<Card> forSale() {
-		List<Card> forSaleList = new ArrayList<Card>();
-		for (Card card : cService.findAllCards()) {
-			if (card.getOwner()==null) {
-				forSaleList.add(card);
-			}
-		}
-		return forSaleList;
+		return cService.noOwner();
 	}
 	
 	
