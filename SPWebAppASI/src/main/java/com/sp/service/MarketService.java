@@ -23,6 +23,8 @@ public class MarketService {
 				Buyer.setMoney(Buyer.getMoney()-cardToBuy.getPrice());
 				Buyer.addCard(cardToBuy);
 				cardToBuy.setOwner(Buyer);
+				cService.saveCard(cardToBuy);
+				uService.saveUser(Buyer);
 			}
 		}
 	}
@@ -33,6 +35,8 @@ public class MarketService {
 			Seller.setMoney(Seller.getMoney()+cardToSell.getPrice());
 			Seller.removeCard(cardToSell);
 			cardToSell.setOwner(null);
+			cService.saveCard(cardToSell);
+			uService.saveUser(Seller);
 		}		
 	}
 	public List<Card> forSale() {

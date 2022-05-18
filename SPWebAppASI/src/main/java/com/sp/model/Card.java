@@ -2,11 +2,14 @@ package com.sp.model;
 
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "CARD")
@@ -22,18 +25,18 @@ public class Card {
 	private int hp;
 	private int price;
 	// Mapping the column of this table
-    @ManyToOne
+	@JsonIgnore
+	@ManyToOne(fetch = FetchType.LAZY)
     //@JoinColumn(name = "User")
-    @JoinColumn(name = "userID", nullable = true)
+    @JoinColumn(referencedColumnName = "userID", name = "userID", nullable = true, unique = false)
 	private User owner;
 	
 	
 	public Card() {
 	}
 
-	public Card(Integer id, String nom, String description, String famille, String affinity, int energy, int hp, int price) {
+	public Card(String nom, String description, String famille, String affinity, int energy, int hp, int price) {
 		super();
-		this.cardID = id;
 		this.nom = nom;
 		this.description = description;
 		this.famille = famille;

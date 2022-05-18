@@ -32,9 +32,4 @@ import com.sp.service.UserService;
           User u = uService.getUser(Integer.valueOf(id));
           return u;
       }
-      
-      @RequestMapping(method=RequestMethod.POST,value="/initUsers")
-      public void initUsers(){
-    	  uService.initUsers();
-  	}
   }

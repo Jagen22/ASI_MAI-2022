@@ -3,7 +3,6 @@ package com.sp.model;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -22,23 +21,19 @@ public class User {
 	private String password;
 	private int money;
 	
-	//Regarder pour nullify a la place de cascade
-	//@OneToMany(cascade = CascadeType.ALL)
 	@OneToMany(mappedBy="owner")
 	private List<Card> listCard;
 	
 	public User() {
 	}
 	
-	public User(Integer id, String pseudo, String name, String surname, String password, int money, List<Card> listCard) {
+	public User(String pseudo, String name, String surname, String password) {
 		super();
-		this.userID = id;
 		this.pseudo = pseudo;
 		this.name = name;
 		this.surname = surname;
 		this.password = password;
-		this.money = money;
-		this.listCard = listCard;
+		this.money = 5000;
 	}
 
 	public Integer getUserID() {

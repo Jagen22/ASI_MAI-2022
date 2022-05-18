@@ -19,7 +19,7 @@ public class CardRestCrt {
 	
 	@RequestMapping(method=RequestMethod.POST,value="/addCard")
     public void addCard(@RequestBody Card card) {
-		cService.addCard(card);
+		cService.saveCard(card);
     }
     
     @RequestMapping(method = RequestMethod.GET, value = "/card")
@@ -30,11 +30,5 @@ public class CardRestCrt {
     @RequestMapping(method=RequestMethod.GET,value="/card/{id}")
     public Card getCard(@PathVariable String id) {
         return cService.getCard(Integer.valueOf(id));
-    }
-	
-    @RequestMapping(method=RequestMethod.POST, value="/initCards")
-    public void initCards(){
-    	cService.initCards();
-	}
-	
+    }	
 }

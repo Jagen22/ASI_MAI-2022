@@ -1,8 +1,9 @@
 package com.sp.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,9 +20,8 @@ public class UserService {
 	@Autowired
 	UserRepository uRepository;
 	
-	public void addUser(User u) {
-		User createdUser=uRepository.save(u);
-		System.out.println(createdUser);
+	public void saveUser(User u) {
+		uRepository.save(u);
 	}
 	
 	public User getUser(int userID) {
@@ -37,19 +37,18 @@ public class UserService {
 		return (List<User>) uRepository.findAll();
 	}
 	
+	@PostConstruct
 	public void initUsers() {
-		for (int userID = 0; userID<5; userID++) {
-			int numCard = 0;
-			List<Card> cardList = new ArrayList<Card>();
-			while (numCard < 5) {
-				int taille = cService.noOwner().size();
-				Card randomCard = cService.noOwner().get((int) (Math.random()*taille-1));
-				cardList.add(randomCard);
-				numCard++;
+		cService.initCards(50);
+		int numUser = 0;
+		while (numUser < 5) {
+			User createdUser=new User("pseudo"+numUser, "name", "surname", "password");
+			uRepository.save(createdUser);
+			for (Card card : cService.get5Card()) {
+				card.setOwner(createdUser);
+				cService.saveCard(card);
 			}
-			System.out.println(cardList);
-			User createdUser=uRepository.save(new User(userID, "pseudo"+userID, "name", "surname", "password", 5000, cardList));
-			System.out.println(createdUser);
+			numUser++;
 		}
 	}
 
@@ -62,6 +61,16 @@ public class UserService {
 			}
 		}
 		return res;
+	}
+
+	public void addUser(User u) {
+		u.setMoney(5000);
+		uRepository.save(u);
+		
+		for (Card card : cService.get5Card()) {
+			card.setOwner(u);
+			cService.saveCard(card);
+		}
 	}
 }
 

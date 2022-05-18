@@ -15,9 +15,8 @@ public class CardService {
 	@Autowired
 	CardRepository cRepository;
 	
-	public void addCard(Card c) {
-		Card createdCard=cRepository.save(c);
-		System.out.println(createdCard);
+	public void saveCard(Card c) {
+		cRepository.save(c);
 	}
 	
 	public Card getCard(int cardID) {
@@ -43,11 +42,38 @@ public class CardService {
 		return noOwnerList;
 	}
 	
-	public void initCards() {
-		for (int cardID = 0; cardID<50; cardID++) {
-			Card createdCard=cRepository.save(new Card(cardID, "name", "description", "famille", "affinity", 10+cardID*10, 30, 500));
-			System.out.println(createdCard);
+	public List<Card> get5Card(){
+		int numCard = 0;
+		List<Card> cardList = new ArrayList<Card>();
+		List<Card> cardNoOwnerList = this.noOwner();
+		int taille = cardNoOwnerList.size();
+		if (taille <= 10) {
+			initCards(5);
 		}
+		while (numCard < 5) {
+			int rand = (int) (Math.random()*(taille-1-numCard));
+			Card randomCard = cardNoOwnerList.get(rand);
+			cardList.add(randomCard);
+			cardNoOwnerList.remove(rand);
+			numCard++;
+		}
+		return cardList;
+	}
+	
+	public void initCards(int nombre) {
+		int numCard = 0;
+		while (numCard < nombre) {
+			
+			cRepository.save(this.randomStats());
+			numCard++;
+		}
+	}
+	
+	public Card randomStats() {
+		int energy = 10 * (int) (Math.random()*5+1);
+		int hp = 50 + 10 * (int) (Math.random()*20);
+		Card card = new Card("name", "description", "famille", "affinity",energy,hp,(hp*energy)/20);
+		return card;
 	}
 
 }
