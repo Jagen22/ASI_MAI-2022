@@ -18,7 +18,6 @@
 **Eléments non réalisés :**
 
 - L'entièreté de la partie front-end pour tester correctement le fonctionnement
-- Peu de tests pour l'authentification et le marché
 
 
 
