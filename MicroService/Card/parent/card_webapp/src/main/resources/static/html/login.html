@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Login</title>
+    <link rel="icon" type="image/x-icon" href="../icones/favicon.ico">
+    <link href="../css/style.css" rel="stylesheet">
+  </head>
+  <body>
+
+    <div class="div-form">
+      <form id="login-form" accept-charset=utf-8>
+        <h1>login</h1>
+        <label>Pseudo</label>
+        <input type="text" name="pseudo" required/>
+        <label>Password</label>
+        <input type="password" name="password" required/>
+        <input type="button" value="Sign In" onclick="handleLogin()"/>
+      </form>
+      <form id="signup-form" accept-charset=utf-8>
+        <h1>Sign Up</h1>
+        <label> Name        </label>
+        <input type="text"      name="name"         required/>
+        <label> Surname     </label>
+        <input type="text"      name="surname"      required/>
+        <label> Password    </label>
+        <input type="password"  name="password"     required/>
+        <label> Repassword  </label>
+        <input type="password"  name="repassword"   required/>
+        <input type="button" value="Sign Up" onclick="handleSignUp()"/>
+      </form>
+    </div>
+  <script src="../js/login.js"></script>  
+  <script src="../js/addUser.js"></script> 
+  </body>
+</html>
