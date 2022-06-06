@@ -15,7 +15,7 @@ public class CardWSClient {
 	static final String URL_USER_CARDS= "http://localhost:8081/userCards";
 
 	
-	public List<CardPriceDTO> forSale() {
+	public static List<CardPriceDTO> forSale() {
 		RestTemplate restTemplate = new RestTemplate();
 		List<CardPriceDTO> res = new ArrayList<CardPriceDTO>();
 		CardPriceDTO[] tab = restTemplate.getForObject(URL_NO_OWNER,CardPriceDTO[].class);
@@ -43,7 +43,6 @@ public class CardWSClient {
 	}
 	
 	
-	//TODO Requête POST mais sans besoin de body
 	public static void initCards(int nb) {
 		RestTemplate restTemplate = new RestTemplate();
 		ResponseEntity<Integer> result = restTemplate.postForEntity(URL_CARD,nb,Integer.class);
